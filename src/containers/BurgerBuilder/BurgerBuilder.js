@@ -21,6 +21,7 @@ export default class BurgerBuilder extends Component {
 		totalPrice: 4,
 		purchasable: false
 	};
+	
 
 	addIngredientHandler = (type) => {
 		const oldCount = this.state.ingredients[type];
