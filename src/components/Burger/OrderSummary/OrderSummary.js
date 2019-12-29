@@ -15,6 +15,9 @@ const orderSummary = (props) => {
 			<h3>Your order summary:</h3>
 			<p>Your tasty order it is almost complete: </p>
 			<ul>{ingredientSummary}</ul>
+			<p>
+				<strong>Total price: {props.price.toFixed(2)} $ </strong>
+			</p>
 			<p>Continue to checkout?</p>
 			<Button btnType="Success" clicked={props.purchaseContinueHandler}>
 				Continue
@@ -23,7 +26,7 @@ const orderSummary = (props) => {
 				Cancel{' '}
 			</Button>
 		</Aux>
-	);	
+	);
 };
 
 export default orderSummary;
