@@ -1,32 +1,38 @@
-import React from 'react';
-import Aux from '../../../hoc/Aux';
+import React, { Component } from 'react';
+import Aux from '../../../hoc/Aux/Aux';
 import Button from '../../UI/Button/Button';
 
-const orderSummary = (props) => {
-	const ingredientSummary = Object.keys(props.ingredients).map((igKey) => {
+class OrderSummary extends Component {
+	// This has no sense to be a class, so it is recomendded to change this component to functional
+	componentWillUpdate() {
+		console.log('[OrderSummary] WillUpdate');
+	}
+	render() {
+		const ingredientSummary = Object.keys(this.props.ingredients).map((igKey) => {
+			return (
+				<li key={igKey}>
+					<span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {this.props.ingredients[igKey]}
+				</li>
+			);
+		});
 		return (
-			<li key={igKey}>
-				<span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {props.ingredients[igKey]}
-			</li>
+			<Aux>
+				<h3>Your order summary:</h3>
+				<p>Your tasty order it is almost complete: </p>
+				<ul>{ingredientSummary}</ul>
+				<p>
+					<strong>Total price: {this.props.price.toFixed(2)} $ </strong>
+				</p>
+				<p>Continue to checkout?</p>
+				<Button btnType="Success" clicked={this.props.purchaseContinueHandler}>
+					Continue
+				</Button>
+				<Button btnType="Danger" clicked={this.props.purchaseCancelledHandler}>
+					Cancel{' '}
+				</Button>
+			</Aux>
 		);
-	});
-	return (
-		<Aux>
-			<h3>Your order summary:</h3>
-			<p>Your tasty order it is almost complete: </p>
-			<ul>{ingredientSummary}</ul>
-			<p>
-				<strong>Total price: {props.price.toFixed(2)} $ </strong>
-			</p>
-			<p>Continue to checkout?</p>
-			<Button btnType="Success" clicked={props.purchaseContinueHandler}>
-				Continue
-			</Button>
-			<Button btnType="Danger" clicked={props.purchaseCancelledHandler}>
-				Cancel{' '}
-			</Button>
-		</Aux>
-	);
-};
+	}
+}
 
-export default orderSummary;
+export default OrderSummary;
